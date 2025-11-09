@@ -5,9 +5,6 @@ Docs about my CIDR implementation from class assignment.
 Two big steps on making this works (= machine from any subnet can ping machines from other subnet):
 - Subnetting
 - CPT setup
-  - Assigning IP addresses
-  - Picking the right transmission medium
-  - Routing packets
 
 ## Subnetting
 
@@ -31,11 +28,24 @@ I will now give you one example of CIDR subnet calculation. Say there is 95 host
 
 One of the room on main office area has over 380 hosts. Choosing to use subnet /23 is doable but we could save more room by sticking the changes only to 4th octet. To do that I divided the room into two subnet instead of the previous "one room = one subnet". With this, it will use 384 address instead of 512.
 
-## CPT Setup: Assigning IP addresses
+There is also supernetting where it combined subnets instead of dividing them. Kinda similar steps. Note the amount of demanded host, pick the subnet that fulfills it, and so on. Blah blah, just look and observe the similarity below:
+
+<img alt="image" src="images/cidr_table.jpg" />
+
+## CPT Setup
 
 If it connects to anything, then it should has an IP address. Unless if its a layer 2 device like switches. Make sure that every connected router and endpoint devices has an IP address. 
 
 For endpoint devices, make sure it has:
-- the correct netmask as the gateway devie.
+- the same netmask as the gateway devie.
 - the correct gateway addr as the one it connects to.
 - an IP address that is within the netmask's boundaries.
+
+For router devices, make sure it has:
+- the same input as your subnet calculations (assuming its correct)
+- the right cables for connected device
+  - router-switches: straight-through
+  - router-router: cross-over
+- setup the static and dynamic routing according to your supernetting calculations with input being source network, source netmask, nexthop IP.
+
+<img alt="image" src="images/subnet_topology.png" />
